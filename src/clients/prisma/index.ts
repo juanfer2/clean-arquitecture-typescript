@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import logger from '../../utils/logger'
 
 const prisma = new PrismaClient({
   errorFormat: 'pretty',
@@ -21,6 +22,15 @@ const prisma = new PrismaClient({
     },
   ],
 });
+
+export const connectDb = async () => {
+  try {
+    await prisma.$connect();
+    logger.info(`conexion with database succesfully`);
+  } catch (error) {
+    logger.error(error);
+  }
+}
 
 export const { user: UserPrisma } = prisma;
 export default prisma;

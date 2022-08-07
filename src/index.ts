@@ -1,21 +1,10 @@
-import "dotenv/config";
-import { InversifyExpressServer } from 'inversify-express-utils';
-import express from "express";
-import cors from "express";
-import container from "./inversify.config";
+import Server from './server'
+import logger from './utils/logger'
 
-const port = process.env.PORT || 3001;
-const server = new InversifyExpressServer(container);
-const app = server.build();
+const port = process.env.PORT || '3001';
 
-app.use(cors());
-app.use(express.json());
+export const server = Server.init(port);
 
-app.get('/', async (req: any, res: any) => {
-  res.send({status: "ok"})
-})
-
-//app.use();
-
-// dbInit().then();
-app.listen(port, () => console.log(`Listo por el puerto ${port}`));
+server.start( async() =>{
+  logger.info(`🚀 Server is running at PORT: ${process.env.PORT}`);
+});

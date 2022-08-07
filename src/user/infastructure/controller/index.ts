@@ -12,11 +12,13 @@ export class UserController {
 
   public create = async ({ body }: Request, res: Response) => {
     const user = await this.userUseCase.register(body);
+
     res.send({ user });
   }
 
   public index = async (_: Request, res: Response) => {
     const users = await this.userUseCase.getAllUsers();
+    // throw new Error("Fake error");
 
     res.send({users});
   }
