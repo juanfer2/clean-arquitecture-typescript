@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+  database:
+    image: postgres
+    restart: always
+    volumes:
+      - "./db_p/database"
+    environment:
+      - DATABASE_HOST=localhost
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=root
+    ports:
+      - 5444:5433
+    
+  
+  project:
+    container_name: clean-arquitecture
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    volumes:
+      - '.:/app'
+      - '/app/node_modules'
+    
+    ports:
+      - '4001:4001'
+
+    environment:
+      - PORT=4001
+      - DATABASE_URL="postgresql://root:root@localhost:5433/db_clean_arquitecture?schema=public"
+    
+    depends_on:
+      - database

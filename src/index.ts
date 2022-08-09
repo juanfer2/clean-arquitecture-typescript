@@ -1,7 +1,7 @@
 import Server from './server'
 import logger from './utils/logger'
 
-const port = process.env.PORT || '3001';
+const port = process.env.PORT || '4001';
 
 export const server = Server.init(port);
 

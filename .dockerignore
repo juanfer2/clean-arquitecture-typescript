@@ -1,0 +1,8 @@
+dist
+.gitignore
+.git
+Dockerfile
+
+node_modules
+.env
+.env.example

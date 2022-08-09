@@ -4,9 +4,15 @@
   "description": "template for init projects with clean arquitecture",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon ./src/index.ts",
+    "dev": "npx nodemon ./src/index.ts",
     "dev:ddd": "nodemon ./source/user/user.app.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "npx tsc -p tsconfig.json",
+    "migrate": "npx prisma migrate dev init",
+    "migration-pull-print": "npx prisma db pull --print",
+    "prisma-generate": "npx prisma generate",
+    "test": "jest",
+    "test-coverage": "jest --coverage",
+    "test-watch": "jest --watch"
   },
   "author": "juanfer",
   "license": "ISC",
@@ -33,8 +39,10 @@
     "@types/jest": "^28.1.6",
     "@types/mongoose": "^5.11.97",
     "@types/morgan": "^1.9.3",
+    "@types/nodemon": "^1.19.2",
     "@types/uuid": "^8.3.4",
     "jest": "^28.1.3",
+    "nodemon": "^2.0.19",
     "prisma": "^4.1.1",
     "ts-node": "^10.9.1",
     "typescript": "^4.7.4"
