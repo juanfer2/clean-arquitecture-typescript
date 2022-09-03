@@ -12,14 +12,21 @@ const logger = createLogger({
     align(),
     printf((info) => printFormat(info))
   ),
-  exitOnError: false
+  exitOnError: false,
+  transports: [
+    // new transports.File({ filename: "temp/logs/info.log" })
+    new transports.Console()
+  ]
 });
 
+/*
 if (process.env.NODE_ENV !== ENV.PRODUCTION) {
   logger.add(new transports.Console());
 } else if (process.env.NODE_ENV !== ENV.DEVELOPMENT) {
-  logger.add(new transports.File({ filename: "./logs/info.log" }));
+  console.log('write')
+  logger.add();
 }
+*/
 
 const getLogType = (message: any) => {
   const status = Number(message.split("=").pop().replace(/ .*/, ""));
@@ -36,7 +43,7 @@ const printFormat = (info: TransformableInfo) => {
   const { timestamp, level, message, ...args } = info;
   const ts = timestamp.slice(0, 19).replace("T", " ");
 
-  return `[${level}]: ${ts} ${message} ${Object.keys(args).length ? JSON.stringify(args, null, 2) : ""}`;
+  return `[${level}]🏷️: ${ts} ${message} ${Object.keys(args).length ? JSON.stringify(args, null, 2) : ""}`;
 };
 
 export const stream = {

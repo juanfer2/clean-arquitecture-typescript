@@ -2,6 +2,7 @@ import app from '../../app';
 import { connectDb } from '../clients/prisma';
 import userRoute from "../../user/infastructure/routes";
 import logger from '../utils/logger';
+import { errorHandler, logErrors } from '../middlewares/error.middleware';
 
 export default class Server {
   public port: string;
@@ -17,7 +18,7 @@ export default class Server {
   start(callback: () => void) {
     try {
       this.connect().then();
-      
+
       app.get('/', async (req: any, res: any) => {
         res.send({status: "ok"})
       })

@@ -13,6 +13,6 @@ app.use(express.json());
 app.use(morgan(LOG_FORMAT, { stream }));
 app.use(logErrors);
 app.use(clientErrorHandler);
-app.use(errorHandler);
+
 
 export default app;
