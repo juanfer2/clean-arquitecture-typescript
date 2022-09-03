@@ -1,6 +1,7 @@
-export interface Repository<T>{
+export interface Repository<T, U, W>{
   all(): Promise<T[]>;
-  find(id: number): Promise<T>;
-  update(where: any, data: T): Promise<T>
-  delete(where: any): Promise<T>
+  find(where: W): Promise<T>;
+  update(where: W, data: U): Promise<T>
+  create(data: U): Promise<T>
+  delete(where: W): Promise<T>
 }

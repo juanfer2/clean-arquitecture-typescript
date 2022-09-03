@@ -1,15 +1,17 @@
+import { inject, injectable } from 'inversify';
 import { UserMapper } from './../domain/user.mapper';
-import { UserRepository } from './../domain/user.repository';
+import { UserRepositoryPostgrest } from './../infastructure/repositories/user.repository';
+import { TYPES } from '../types'
 
+@injectable()
 export class UserUseCase {
   constructor(
-    private readonly userRepository: UserRepository
+    @inject(TYPES.UserRepository) private userRepository: UserRepositoryPostgrest
   ) {}
 
   public register = async (
     { name, email, username }: { name: string, email: string, username: string }
   ) => {
-    console.log('register')
     const userMapper = new UserMapper({ name, email, username });
     const newUser = await this.userRepository.create(userMapper);
 
@@ -23,8 +25,9 @@ export class UserUseCase {
   }
 
   public async findById(id: number) {
-    const user = await this.userRepository.findById(id);
+    console.log(this.userRepository);
+    const user = await this.userRepository.find({id});
 
-    return user
+    return user;
   }
 }

@@ -1,9 +1,7 @@
-import { UserEntity } from './user.entity';
+import { BaseRepositoryPostgrest } from '../../common/repository';
+import { UserEntity, UserWhere } from './user.entity';
+import { UserMapper } from './user.mapper';
 
-export interface UserRepository {
-  findById(id: number): Promise<UserEntity | null>;
-  create(
-    { name, email, username }: { name: string, email: string, username: string; }
-  ): Promise<UserEntity | null>;
-  all(): Promise<UserEntity[] | null>
+export interface UserRepository extends BaseRepositoryPostgrest<UserEntity, UserWhere, UserMapper>{
+  
 }

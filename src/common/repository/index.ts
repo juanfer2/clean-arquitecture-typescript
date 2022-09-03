@@ -1,11 +1,12 @@
 import { UserPrisma } from "../clients/prisma";
 import { PrismaPromise } from "@prisma/client";
 import { Repository } from "./models";
+import { injectable } from "inversify";
 
-
-export abstract class BaseRepositoryPostgrest<T> implements Repository<T> {
+@injectable()
+export abstract class BaseRepositoryPostgrest<T, U, W> implements Repository<T, U, W> {
   prismaClient: any;
-  
+
   constructor() {}
 
   async all(): Promise<T[]> {
@@ -14,20 +15,26 @@ export abstract class BaseRepositoryPostgrest<T> implements Repository<T> {
     return data;
   }
 
-  async find(id: number): Promise<T> {
-    const data = await this.prismaClient.findUnique({where: {id}});
+  async find(where: W): Promise<T> {
+    const data = await this.prismaClient.findUnique({where});
 
     return data;
   }
 
-  async update(where: any, data: any): Promise<T> {
+  async create(data: U): Promise<T> {
+    const newData = await this.prismaClient.create({data});
+
+    return newData;
+  }
+
+  async update(where: W, data: U): Promise<T> {
     const dataResponse = this.prismaClient.update({ where, data})
 
     return dataResponse;
   }
 
-  delete(where: any): Promise<T> {
-    const dataResponse = this.prismaClient.update({ where })
+  async delete(where: W): Promise<T> {
+    const dataResponse = await this.prismaClient.update({ where })
 
     return dataResponse;
   }

@@ -4,3 +4,10 @@ export interface UserEntity {
   email: string;
   username: string;
 }
+
+export interface UserWhere {
+  id?: number;
+  name?: string;
+  email?: string;
+  username?: string;
+}
