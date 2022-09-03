@@ -2,8 +2,8 @@ import "dotenv/config";
 import morgan from "morgan";
 import express, { Request, Response } from "express";
 import cors from "express";
-import logger, {stream} from './utils/logger'
-import { logErrors, clientErrorHandler, errorHandler } from './middlewares/error.middleware'
+import logger, {stream} from './common/utils/logger'
+import { logErrors, clientErrorHandler, errorHandler } from './common/middlewares/error.middleware'
 
 const app = express();
 const LOG_FORMAT: any = ':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" STATUS=:status :res[content-length] ":referrer" ":user-agent"';

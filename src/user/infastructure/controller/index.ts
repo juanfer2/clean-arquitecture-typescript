@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { UserUseCase } from "../../application/user.use_case";
+import { UserRepositoryP } from "../repositories/user.repository";
 
 export class UserController {
   constructor(
@@ -17,7 +18,9 @@ export class UserController {
   }
 
   public index = async (_: Request, res: Response) => {
-    const users = await this.userUseCase.getAllUsers();
+    // const users = await this.userUseCase.getAllUsers();
+    const userRepo = new UserRepositoryP();
+    const users = await userRepo.all();
     // throw new Error("Fake error");
 
     res.send({users});

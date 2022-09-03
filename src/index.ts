@@ -1,5 +1,5 @@
-import Server from './server'
-import logger from './utils/logger'
+import Server from './common/server'
+import logger from './common/utils/logger'
 
 const port = process.env.PORT || '4001';
 

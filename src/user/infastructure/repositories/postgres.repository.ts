@@ -1,4 +1,4 @@
-import { UserPrisma } from '../../../clients/prisma';
+import { UserPrisma } from '../../../common/clients/prisma';
 import { UserEntity } from '../../domain/user.entity';
 import { UserRepository } from '../../domain/user.repository';
 import { injectable } from "inversify"

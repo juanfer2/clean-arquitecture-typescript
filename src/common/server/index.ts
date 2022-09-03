@@ -1,6 +1,6 @@
-import app from '../app';
+import app from '../../app';
 import { connectDb } from '../clients/prisma';
-import userRoute from "../user/infastructure/routes";
+import userRoute from "../../user/infastructure/routes";
 import logger from '../utils/logger';
 
 export default class Server {
@@ -35,4 +35,3 @@ export default class Server {
     return await connectDb();
   }
 }
-
