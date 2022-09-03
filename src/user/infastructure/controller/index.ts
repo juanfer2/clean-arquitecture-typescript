@@ -2,10 +2,8 @@ import { Prisma } from "@prisma/client";
 import { ValidationError } from "class-validator";
 import { Request, Response } from "express";
 import { inject, injectable } from "inversify";
-import { next } from "inversify-express-utils";
 import { UserUseCase } from "../../application/user.use_case";
 import { TYPES } from "../../types";
-import { UserRepositoryPostgrest } from "../repositories/user.repository";
 
 @injectable()
 export class UserController {
