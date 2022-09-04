@@ -25,7 +25,7 @@ export default class Server {
 
       app.use(userRoute);
       app.listen(this.port, () => console.log(`Listo por el puerto ${this.port}`));
-      
+
       callback();
     } catch (err) {
       logger.error(err)

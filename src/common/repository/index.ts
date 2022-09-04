@@ -21,11 +21,7 @@ export abstract class BaseRepositoryPostgrest<T, U, W> implements Repository<T, 
   
       return data;
     } catch (e: any) {
-
-      console.log(e instanceof Prisma.PrismaClientValidationError)
       if (e instanceof Prisma.PrismaClientValidationError) {
-        console.log("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeEEERRRR")
-        console.log(e.message)
         throw new Error(e.message)
       }
 

@@ -46,7 +46,6 @@ export class UserUseCase {
     try {
       await validateOrReject(userMapper);
     } catch (error: any) {
-      console.log(error)
       let message = ''
 
       error.map((e: any) => {

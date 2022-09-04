@@ -21,6 +21,7 @@ export class UserController {
 
       res.send({ user });
     } catch (error) {
+      console.log(error)
       if (error instanceof Array<ValidationError>) {
         res.status(402).send({ error: error });
       } else if (error instanceof Prisma.PrismaClientKnownRequestError) {
