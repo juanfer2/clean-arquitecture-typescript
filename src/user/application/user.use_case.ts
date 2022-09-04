@@ -49,10 +49,7 @@ export class UserUseCase {
       let message = ''
 
       error.map((e: any) => {
-        console.log(e.constraints.isEmail)
         const property = capitalizeFirstLetter(e.property)
-        console.log(property)
-        console.log(e.constraints['is'+property])
         message = message + `${e.property}: ${e.value} ${e.constraints['is'+property]}`
       })
 
