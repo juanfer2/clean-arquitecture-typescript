@@ -1,0 +1,60 @@
+import { inject, injectable } from 'inversify';
+import { {{properCase name}}Mapper } from '../domain/{{camelCase name}}.mapper';
+import { {{properCase name}}RepositoryPostgrest } from '../infrastructure/repositories/{{camelCase name}}.repository';
+import { TYPES } from '../types';
+import { validateOrReject } from 'class-validator';
+import logger from '../../common/utils/logger';
+import {capitalizeFirstLetter} from '../../common/utils';
+
+@injectable()
+export class {{properCase name}}UseCase {
+  constructor(
+    @inject(TYPES.{{properCase name}}Repository) private {{camelCase name}}Repository: {{properCase name}}RepositoryPostgrest
+  ) {
+  }
+
+  public register = async () => {
+    try {
+      const {{camelCase name}}Mapper = new {{properCase name}}Mapper();
+      await this.validate{{properCase name}}({{camelCase name}}Mapper);
+      const new{{properCase name}}= await this.{{camelCase name}}Repository.create({{camelCase name}}Mapper);
+
+      return new{{properCase name}};
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  public getAll{{camelCase name}}s = async () => {
+    const {{camelCase name}}s = await this.{{camelCase name}}Repository.all();
+
+    return {{camelCase name}}s;
+  }
+
+  public async findById(id: number) {
+    const {{camelCase name}} = await this.{{camelCase name}}Repository.find({id});
+
+    return {{camelCase name}};
+  }
+
+  public async update(id: number, data: {{properCase name}}Mapper) {
+    const {{camelCase name}} = await this.{{camelCase name}}Repository.update({id}, {...data});
+
+    return {{camelCase name}};
+  }
+
+  private async validate{{properCase name}}({{camelCase name}}Mapper: {{properCase name}}Mapper) {
+    try {
+      await validateOrReject({{camelCase name}}Mapper);
+    } catch (error: any) {
+      let message = ''
+
+      error.map((e: any) => {
+        const property = capitalizeFirstLetter(e.property)
+        message = message + `${e.property}: ${e.value} ${e.constraints['is'+property]}`
+      })
+
+      throw error;
+    }
+  }
+}

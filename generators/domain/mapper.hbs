@@ -1,0 +1,15 @@
+import { injectable } from 'inversify';
+import { {{properCase name}}Entity, {{properCase name}}Optional } from './{{camelCase name}}.entity';
+import {
+  IsNotEmpty
+} from 'class-validator';
+
+@injectable()
+export class {{properCase name}}Mapper implements {{properCase name}}Entity{
+  @IsNotEmpty({message: 'The id is required'})
+  id: string;
+
+  constructor({}) {
+    this.id = id;
+  }
+}

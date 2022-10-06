@@ -1,0 +1,15 @@
+import { Container } from 'inversify';
+import 'reflect-metadata';
+import { TYPES } from './types';
+import { {{properCase name}}UseCase } from './application/{{camelCase name}}.use_case';
+import { {{properCase name}}Controller } from './infrastructure/controllers/{{camelCase name}}.controller';
+import { {{properCase name}}RepositoryPostgrest } from './infrastructure/repositories/{{camelCase name}}.repository'
+import { {{properCase name}}Mapper } from './domain/{{camelCase name}}.mapper';
+
+const container = new Container();
+container.bind<{{properCase name}}RepositoryPostgrest>(TYPES.{{properCase name}}Repository).to({{properCase name}}RepositoryPostgrest)
+container.bind<{{properCase name}}Mapper>(TYPES.{{properCase name}}Mapper).to({{properCase name}}Mapper)
+container.bind<{{properCase name}}UseCase>(TYPES.{{properCase name}}UseCase).to({{properCase name}}UseCase)
+container.bind<{{properCase name}}Controller>(TYPES.{{properCase name}}Controller).to({{properCase name}}Controller)
+
+export { container };

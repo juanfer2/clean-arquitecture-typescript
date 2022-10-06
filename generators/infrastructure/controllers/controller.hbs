@@ -1,0 +1,69 @@
+import { Request, Response } from 'express';
+import { inject, injectable } from 'inversify';
+import { Prisma } from '@prisma/client';
+import { ValidationError } from 'class-validator';
+import { TYPES } from '../../types';
+import { {{properCase name}}UseCase } from '../../application/{{camelCase name}}.use_case';
+
+@injectable()
+export class {{properCase name}}Controller {
+  constructor(
+    @inject(TYPES.{{properCase name}}UseCase) private {{camelCase name}}UseCase: {{properCase name}}UseCase
+  ) {
+    this.create = this.create;
+    this.index = this.index;
+  };
+
+  public create = async ({ body }: Request, res: Response, next: Function) => {
+    try {
+      const {{camelCase name}} = await this.{{camelCase name}}UseCase.register(body);
+
+      res.send({ {{camelCase name}} });
+    } catch (error) {
+      if (error instanceof Array<ValidationError>) {
+        res.status(402).send({ error: error });
+      } else if (error instanceof Prisma.PrismaClientKnownRequestError) {
+        res.status(402).send({ error: error.message });
+      } else { 
+        res.status(500).send({ error: error });
+      }
+    }
+  };
+
+  public index = async (_: Request, res: Response) => {
+    const {{camelCase name}}s = await this.{{camelCase name}}UseCase.getAll{{camelCase name}}s();
+
+    res.send({{camelCase name}}s);
+  };
+
+  public show = async ({ params }: Request, res: Response) => {
+    try {
+      const id = params.id
+      const {{camelCase name}} = await this.{{camelCase name}}UseCase.findById(parseInt(id));
+
+      if ({{camelCase name}}) {
+        res.send({{{camelCase name}}})
+      } else {
+        res.status(400).send({message: `{{camelCase name}} id: ${id} not found`});
+      };
+    } catch (error: any) {
+      res.status(500).send({ error: error });
+    }
+  };
+
+   public update = async ({ params, body }: Request, res: Response) => {
+    try {
+      const id = params.id;
+      const update{{properCase name}} = await this.{{camelCase name}}UseCase.update(parseInt(id), body);
+
+      if (update{{properCase name}}) {
+        res.send(update{{properCase name}});
+      } else {
+        res.status(400).send({ message: `{{camelCase name}} id: ${id} not found` });
+      }
+    } catch (error: any) {
+      res.status(500).send({ error: error });
+    }
+  };
+
+}

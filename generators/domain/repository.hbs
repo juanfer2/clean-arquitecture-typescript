@@ -1,0 +1,10 @@
+import { {{properCase name}}Entity, {{properCase name}}Optional } from './{{camelCase name}}.entity';
+import { {{properCase name}}Mapper } from './{{camelCase name}}.mapper';
+
+export interface {{properCase name}}Repository<T> {
+  all(): Promise<T[]>;
+  find(where: {{properCase name}}Optional): Promise<T>;
+  update(where: {{properCase name}}Optional, data: {{properCase name}}Mapper): Promise<T>
+  create(data: {{properCase name}}Mapper): Promise<T>
+  delete(where: {{properCase name}}Optional): Promise<T>
+}

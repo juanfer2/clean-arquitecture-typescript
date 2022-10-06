@@ -1,0 +1,15 @@
+node_modules
+.DS_Store
+
+dist
+dist-ssr
+
+*.local
+node_modules/*
+.eslintrc.js
+.prettier.json
+*.d.ts
+pnpm-lock.yaml
+package.json
+babel.config.js
+.eslintrc.js

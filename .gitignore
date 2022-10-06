@@ -1,11 +1,6 @@
-node_modules
-# Keep environment variables out of version control
-.env
-
-/dist
-/build
-
-/coverage
-yarn-error.log
-node-error.log
-/temp/*
+.idea/
+.vscode/
+node_modules/
+build/
+tmp/
+temp/

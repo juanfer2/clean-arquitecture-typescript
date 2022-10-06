@@ -1,0 +1,17 @@
+import { injectable } from 'inversify';
+import { BaseRepositoryPostgrest } from '../../repository';
+import { {{properCase name}} } from '../models/{{camelCase name}}';
+import { {{camelCase name}}Prisma } from '../../clients/prisma';
+import { 
+  {{properCase name}}Mapper, 
+  {{properCase name}}Optional,
+  {{properCase name}}Repository
+} from '../../domain';
+
+@injectable()
+export class {{properCase name}}RepositoryPostgrest extends BaseRepositoryPostgrest<{{properCase name}}, {{properCase name}}Mapper, {{properCase name}}Optional> implements {{properCase name}}Repository<{{properCase name}}> {
+  constructor() {
+    super();
+    this.prismaClient = {{camelCase name}}Prisma;
+  }
+}

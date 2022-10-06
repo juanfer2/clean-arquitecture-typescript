@@ -1,0 +1,15 @@
+import 'reflect-metadata';
+import { Router } from 'express';
+import { TYPES } from '@/{{properCase name}}/types';
+import { container } from '@/{{properCase name}}/container'
+import { {{properCase name}}Controller } from '@/{{properCase name}}/infrastructure/controllers/{{camelCase name}}.controller';
+
+const {{camelCase name}}Controller = container.get<{{properCase name}}Controller>(TYPES.{{properCase name}}Controller);
+
+const route = Router();
+
+route.post('/{{camelCase name}}s', {{camelCase name}}Controller.create);
+route.get('/{{camelCase name}}s/:id', {{camelCase name}}Controller.show);
+route.get('/{{camelCase name}}s', {{camelCase name}}Controller.index);
+
+export default route;
